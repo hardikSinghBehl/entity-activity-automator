@@ -13,7 +13,9 @@ import javax.persistence.Table;
 
 import com.behl.freezo.entity.embeddable.Activity;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
 @Entity
 @Table(name = "patients")
@@ -31,6 +33,7 @@ public class Patient implements Serializable {
     private String fullName;
 
     @Embedded
-    private Activity activity;
+    @Setter(AccessLevel.NONE)
+    private Activity activity = new Activity();
 
 }
