@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.behl.freezo.security.CustomUserDetailService;
+import com.behl.freezo.security.CustomDoctorDetailService;
 import com.behl.freezo.security.utility.JwtUtils;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ import lombok.AllArgsConstructor;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtils;
-    private final CustomUserDetailService customUserDetialService;
+    private final CustomDoctorDetailService customUserDetialService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (authorizationHeader != null) {
             if (authorizationHeader.startsWith("Bearer ")) {
                 final var token = authorizationHeader.substring(7);
-                final var userId = jwtUtils.extractUserId(token);
+                final var userId = jwtUtils.extractDoctorId(token);
 
                 if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 

@@ -2,7 +2,7 @@ package com.behl.freezo.security.configuration;
 
 import java.util.UUID;
 
-public class LoggedInUserDetialProvider {
+public class LoggedInDoctorDetialProvider {
 
     private static final ThreadLocal<UUID> userId = new ThreadLocal<UUID>();
 

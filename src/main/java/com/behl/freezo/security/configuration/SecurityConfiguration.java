@@ -10,10 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.behl.freezo.security.CustomUserDetailService;
+import com.behl.freezo.security.CustomDoctorDetailService;
 import com.behl.freezo.security.constant.ApiPathExclusion;
 import com.behl.freezo.security.filter.JwtAuthenticationFilter;
-import com.behl.freezo.security.filter.LoggedUserDetailStorageFilter;
+import com.behl.freezo.security.filter.LoggedInDoctorDetailStorageFilter;
 
 import lombok.AllArgsConstructor;
 
@@ -22,9 +22,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final CustomUserDetailService customUserDetialService;
+    private final CustomDoctorDetailService customUserDetialService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final LoggedUserDetailStorageFilter loggedUserDetailStorageFilter;
+    private final LoggedInDoctorDetailStorageFilter loggedUserDetailStorageFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -29,7 +29,7 @@ public class JwtUtils {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public UUID extractUserId(final String token) {
+    public UUID extractDoctorId(final String token) {
         return UUID.fromString((String) extractAllClaims(token).get("user_id"));
     }
 
