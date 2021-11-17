@@ -30,7 +30,7 @@ public class JwtUtils {
     }
 
     public UUID extractDoctorId(final String token) {
-        return UUID.fromString((String) extractAllClaims(token).get("user_id"));
+        return UUID.fromString((String) extractAllClaims(token).get("doctor_id"));
     }
 
     public Date extractExpiration(final String token) {
