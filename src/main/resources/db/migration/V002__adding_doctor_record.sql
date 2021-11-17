@@ -1,1 +1,1 @@
-INSERT INTO doctors VALUES ('2f0f7ec4-d594-462e-95b0-2198b38e7d5f','Otto Octavius', '$2a$10$ES44yFas35w1LRjpjbHK8uZMFM8.QjpW4/Q5mSxJNH.yJs1maLelq')
+INSERT INTO doctors VALUES ('2f0f7ec4-d594-462e-95b0-2198b38e7d5f','octavius@otto.com', '$2a$10$ES44yFas35w1LRjpjbHK8uZMFM8.QjpW4/Q5mSxJNH.yJs1maLelq')
