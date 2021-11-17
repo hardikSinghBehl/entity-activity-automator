@@ -10,7 +10,7 @@ public class LoggedInDoctorDetialProvider {
         userId.set(id);
     }
 
-    public static UUID getLoggedInUserId() {
+    public static UUID getId() {
         return userId.get();
     }
 

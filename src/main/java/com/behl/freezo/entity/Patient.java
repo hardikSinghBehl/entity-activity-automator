@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.behl.freezo.entity.embeddable.Activity;
@@ -35,5 +36,10 @@ public class Patient implements Serializable {
     @Embedded
     @Setter(AccessLevel.NONE)
     private Activity activity = new Activity();
+
+    @PrePersist
+    void onCreate() {
+        this.id = UUID.randomUUID();
+    }
 
 }
