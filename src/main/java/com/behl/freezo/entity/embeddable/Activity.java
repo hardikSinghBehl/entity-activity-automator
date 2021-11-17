@@ -9,7 +9,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import com.behl.freezo.security.configuration.LoggedInDoctorDetialProvider;
+import com.behl.freezo.security.configuration.LoggedInDoctorDetailProvider;
 
 import lombok.Data;
 
@@ -31,14 +31,14 @@ public class Activity {
         this.createdAt = LocalDateTime.now(ZoneId.of("+00:00"));
         this.updatedAt = LocalDateTime.now(ZoneId.of("+00:00"));
 
-        this.createdBy = LoggedInDoctorDetialProvider.getId();
-        this.updatedBy = LoggedInDoctorDetialProvider.getId();
+        this.createdBy = LoggedInDoctorDetailProvider.getId();
+        this.updatedBy = LoggedInDoctorDetailProvider.getId();
     }
 
     @PreUpdate
     void onUpdate() {
         this.updatedAt = LocalDateTime.now(ZoneId.of("+00:00"));
-        this.updatedBy = LoggedInDoctorDetialProvider.getId();
+        this.updatedBy = LoggedInDoctorDetailProvider.getId();
     }
 
 }

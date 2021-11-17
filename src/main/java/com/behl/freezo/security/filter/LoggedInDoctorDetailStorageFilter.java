@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.behl.freezo.security.configuration.LoggedInDoctorDetialProvider;
+import com.behl.freezo.security.configuration.LoggedInDoctorDetailProvider;
 import com.behl.freezo.security.utility.JwtUtils;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class LoggedInDoctorDetailStorageFilter extends OncePerRequestFilter {
             final var token = authorizationHeader.substring(7);
             final var userId = jwtUtils.extractDoctorId(token);
 
-            LoggedInDoctorDetialProvider.setUserId(userId);
+            LoggedInDoctorDetailProvider.setUserId(userId);
         }
         filterChain.doFilter(request, response);
     }
