@@ -2,12 +2,14 @@ package com.behl.freezo.service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.behl.freezo.dto.AppointmentCreationRequestDto;
+import com.behl.freezo.dto.AppointmentDto;
 import com.behl.freezo.entity.Appointment;
 import com.behl.freezo.repository.AppointmentRepository;
 
@@ -34,8 +36,14 @@ public class AppointmentService {
         appointmentRepository.save(appointment);
     }
 
-    public List<Appointment> retreive(final UUID patientId) {
-        return appointmentRepository.findByPatientId(patientId);
+    public List<AppointmentDto> retreive(final UUID patientId) {
+        return appointmentRepository.findByPatientId(patientId).parallelStream().map(appointment -> {
+            final var appointmentActivity = appointment.getActivity();
+            return AppointmentDto.builder().id(appointment.getId()).patientId(appointment.getPatientId())
+                    .scheduledAt(appointment.getScheduledAt()).createdAt(appointmentActivity.getCreatedAt())
+                    .createdBy(appointmentActivity.getCreatedBy()).updatedAt(appointmentActivity.getUpdatedAt())
+                    .updatedBy(appointmentActivity.getUpdatedBy()).build();
+        }).collect(Collectors.toList());
     }
 
 }

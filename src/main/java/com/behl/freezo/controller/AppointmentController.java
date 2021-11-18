@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.behl.freezo.dto.AppointmentCreationRequestDto;
-import com.behl.freezo.entity.Appointment;
+import com.behl.freezo.dto.AppointmentDto;
 import com.behl.freezo.service.AppointmentService;
 
 import lombok.AllArgsConstructor;
@@ -46,7 +46,7 @@ public class AppointmentController {
 
     @GetMapping(value = "/patient/{patientId}/appointment")
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<List<Appointment>> appointmentsRetreivalHandler(
+    public ResponseEntity<List<AppointmentDto>> appointmentsRetreivalHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId) {
         return ResponseEntity.ok(appointmentService.retreive(patientId));
     }

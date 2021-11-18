@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.behl.freezo.dto.PatientCreationRequestDto;
-import com.behl.freezo.entity.Patient;
+import com.behl.freezo.dto.PatientDto;
 import com.behl.freezo.service.PatientService;
 
 import lombok.AllArgsConstructor;
@@ -44,7 +44,7 @@ public class PatientController {
 
     @GetMapping(value = "/patient/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<Patient> patientRetreivalhandler(
+    public ResponseEntity<PatientDto> patientRetreivalhandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId) {
         return ResponseEntity.ok(patientService.get(patientId));
     }

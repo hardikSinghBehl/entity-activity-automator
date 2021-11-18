@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.behl.freezo.dto.PatientCreationRequestDto;
+import com.behl.freezo.dto.PatientDto;
 import com.behl.freezo.entity.Patient;
 import com.behl.freezo.repository.PatientRepository;
 
@@ -31,9 +32,13 @@ public class PatientService {
         return response;
     }
 
-    public Patient get(final UUID patientId) {
-        return patientRepository.findById(patientId)
+    public PatientDto get(final UUID patientId) {
+        final var patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        final var patientActivity = patient.getActivity();
+        return PatientDto.builder().id(patient.getId()).fullName(patient.getFullName())
+                .createdAt(patientActivity.getCreatedAt()).createdBy(patientActivity.getCreatedBy())
+                .updatedAt(patientActivity.getUpdatedAt()).updatedBy(patientActivity.getUpdatedBy()).build();
     }
 
     public void update(final UUID patientId, final PatientCreationRequestDto patientUpdationRequestDto) {
