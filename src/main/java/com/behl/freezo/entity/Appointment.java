@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.behl.freezo.entity.embeddable.Activity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -38,6 +39,7 @@ public class Appointment implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "patient_id", nullable = false, updatable = false, insertable = false)
+    @JsonIgnore
     private Patient patient;
 
     @Column(name = "scheduled_at", nullable = false)
