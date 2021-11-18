@@ -14,7 +14,7 @@ CREATE TABLE patients (
 );
 
 CREATE TABLE appointments (
-  id INTEGER PRIMARY KEY,
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
   patient_id UUID NOT NULL,
   scheduled_at TIMESTAMP NOT NULL,
   created_at TIMESTAMP NOT NULL,
