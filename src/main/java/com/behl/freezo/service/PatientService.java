@@ -36,4 +36,12 @@ public class PatientService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
+    public void update(final UUID patientId, final PatientCreationRequestDto patientUpdationRequestDto) {
+        final var patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        patient.setFullName(patientUpdationRequestDto.getFullName());
+
+        patientRepository.save(patient);
+    }
+
 }

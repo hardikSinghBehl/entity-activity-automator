@@ -2,6 +2,7 @@ package com.behl.freezo.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -32,8 +33,11 @@ public class Appointment implements Serializable {
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private Integer id;
 
+    @Column(name = "patient_id", nullable = false)
+    private UUID patientId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patient_id", nullable = false, updatable = false, insertable = false)
     private Patient patient;
 
     @Column(name = "scheduled_at", nullable = false)
