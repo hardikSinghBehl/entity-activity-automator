@@ -1,4 +1,4 @@
-package com.behl.freezo.security.configuration;
+package com.behl.freezo.configuration.security;
 
 import java.util.UUID;
 

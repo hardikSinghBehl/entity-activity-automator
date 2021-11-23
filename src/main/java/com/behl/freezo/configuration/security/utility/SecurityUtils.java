@@ -1,4 +1,4 @@
-package com.behl.freezo.security.utility;
+package com.behl.freezo.configuration.security.utility;
 
 import java.util.List;
 

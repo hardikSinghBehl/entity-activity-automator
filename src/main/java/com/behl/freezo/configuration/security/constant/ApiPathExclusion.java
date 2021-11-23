@@ -1,4 +1,4 @@
-package com.behl.freezo.security.constant;
+package com.behl.freezo.configuration.security.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

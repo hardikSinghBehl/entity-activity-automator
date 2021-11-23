@@ -1,4 +1,4 @@
-package com.behl.freezo.security.filter;
+package com.behl.freezo.configuration.security.filter;
 
 import java.io.IOException;
 

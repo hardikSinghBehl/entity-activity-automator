@@ -8,9 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.behl.freezo.configuration.security.utility.JwtUtils;
 import com.behl.freezo.dto.LoginRequestDto;
 import com.behl.freezo.repository.DoctorRepository;
-import com.behl.freezo.security.utility.JwtUtils;
 
 import lombok.AllArgsConstructor;
 

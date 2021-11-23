@@ -1,4 +1,4 @@
-package com.behl.freezo.security.utility;
+package com.behl.freezo.configuration.security.utility;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -10,8 +10,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.behl.freezo.configuration.security.properties.JwtConfigurationProperties;
 import com.behl.freezo.entity.Doctor;
-import com.behl.freezo.security.configuration.properties.JwtConfigurationProperties;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

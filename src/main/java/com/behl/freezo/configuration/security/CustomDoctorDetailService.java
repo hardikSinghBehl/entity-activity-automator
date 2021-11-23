@@ -1,4 +1,4 @@
-package com.behl.freezo.security;
+package com.behl.freezo.configuration.security;
 
 import java.util.UUID;
 
@@ -10,8 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.behl.freezo.configuration.security.utility.SecurityUtils;
 import com.behl.freezo.repository.DoctorRepository;
-import com.behl.freezo.security.utility.SecurityUtils;
 
 import lombok.AllArgsConstructor;
 

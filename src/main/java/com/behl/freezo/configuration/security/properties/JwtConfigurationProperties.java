@@ -1,4 +1,4 @@
-package com.behl.freezo.security.configuration.properties;
+package com.behl.freezo.configuration.security.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

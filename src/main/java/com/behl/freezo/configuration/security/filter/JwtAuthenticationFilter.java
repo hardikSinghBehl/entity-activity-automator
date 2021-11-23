@@ -1,4 +1,4 @@
-package com.behl.freezo.security.filter;
+package com.behl.freezo.configuration.security.filter;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.behl.freezo.security.CustomDoctorDetailService;
-import com.behl.freezo.security.utility.JwtUtils;
+import com.behl.freezo.configuration.security.CustomDoctorDetailService;
+import com.behl.freezo.configuration.security.utility.JwtUtils;
 
 import lombok.AllArgsConstructor;
 

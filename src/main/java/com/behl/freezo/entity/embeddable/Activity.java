@@ -9,7 +9,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import com.behl.freezo.security.configuration.LoggedInDoctorDetailProvider;
+import com.behl.freezo.configuration.security.LoggedInDoctorDetailProvider;
 
 import lombok.Data;
 

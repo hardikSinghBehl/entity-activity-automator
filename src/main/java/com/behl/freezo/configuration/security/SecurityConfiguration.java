@@ -1,4 +1,4 @@
-package com.behl.freezo.security.configuration;
+package com.behl.freezo.configuration.security;
 
 import java.util.List;
 
@@ -10,10 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.behl.freezo.security.CustomDoctorDetailService;
-import com.behl.freezo.security.constant.ApiPathExclusion;
-import com.behl.freezo.security.filter.JwtAuthenticationFilter;
-import com.behl.freezo.security.filter.LoggedInDoctorDetailStorageFilter;
+import com.behl.freezo.configuration.security.constant.ApiPathExclusion;
+import com.behl.freezo.configuration.security.filter.JwtAuthenticationFilter;
+import com.behl.freezo.configuration.security.filter.LoggedInDoctorDetailStorageFilter;
 
 import lombok.AllArgsConstructor;
 
