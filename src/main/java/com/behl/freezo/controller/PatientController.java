@@ -1,5 +1,6 @@
 package com.behl.freezo.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -47,6 +48,12 @@ public class PatientController {
     public ResponseEntity<PatientDto> patientRetreivalhandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId) {
         return ResponseEntity.ok(patientService.get(patientId));
+    }
+
+    @GetMapping(value = "/patient", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity<List<PatientDto>> patientListRetreivalhandler() {
+        return ResponseEntity.ok(patientService.get());
     }
 
 }

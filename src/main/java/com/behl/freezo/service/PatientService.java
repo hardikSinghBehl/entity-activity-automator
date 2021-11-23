@@ -1,8 +1,10 @@
 package com.behl.freezo.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,15 @@ public class PatientService {
         patient.setFullName(patientUpdationRequestDto.getFullName());
 
         patientRepository.save(patient);
+    }
+
+    public List<PatientDto> get() {
+        return patientRepository.findAll().parallelStream().map(patient -> {
+            final var patientActivity = patient.getActivity();
+            return PatientDto.builder().id(patient.getId()).fullName(patient.getFullName())
+                    .createdAt(patientActivity.getCreatedAt()).createdBy(patientActivity.getCreatedBy())
+                    .updatedAt(patientActivity.getUpdatedAt()).updatedBy(patientActivity.getUpdatedBy()).build();
+        }).collect(Collectors.toList());
     }
 
 }
