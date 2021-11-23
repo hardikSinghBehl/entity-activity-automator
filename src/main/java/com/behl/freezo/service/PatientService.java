@@ -40,7 +40,8 @@ public class PatientService {
         final var patientActivity = patient.getActivity();
         return PatientDto.builder().id(patient.getId()).fullName(patient.getFullName())
                 .createdAt(patientActivity.getCreatedAt()).createdBy(patientActivity.getCreatedBy())
-                .updatedAt(patientActivity.getUpdatedAt()).updatedBy(patientActivity.getUpdatedBy()).build();
+                .updatedAt(patientActivity.getUpdatedAt()).updatedBy(patientActivity.getUpdatedBy())
+                .isActive(patientActivity.isActive()).build();
     }
 
     public void update(final UUID patientId, final PatientCreationRequestDto patientUpdationRequestDto) {
@@ -56,8 +57,18 @@ public class PatientService {
             final var patientActivity = patient.getActivity();
             return PatientDto.builder().id(patient.getId()).fullName(patient.getFullName())
                     .createdAt(patientActivity.getCreatedAt()).createdBy(patientActivity.getCreatedBy())
-                    .updatedAt(patientActivity.getUpdatedAt()).updatedBy(patientActivity.getUpdatedBy()).build();
+                    .updatedAt(patientActivity.getUpdatedAt()).updatedBy(patientActivity.getUpdatedBy())
+                    .isActive(patientActivity.isActive()).build();
         }).collect(Collectors.toList());
+    }
+
+    public void delete(final UUID patientId) {
+        final var patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+
+        patient.getActivity().setActive(false);
+
+        patientRepository.save(patient);
     }
 
 }

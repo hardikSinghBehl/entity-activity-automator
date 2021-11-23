@@ -19,5 +19,6 @@ public class AppointmentDto {
     private final UUID createdBy;
     private final LocalDateTime updatedAt;
     private final UUID updatedBy;
+    private final boolean isActive;
 
 }

@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,14 +30,14 @@ public class PatientController {
 
     @PostMapping(value = "/patient", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<Map<String, String>> patientCreationhandler(
+    public ResponseEntity<Map<String, String>> patientCreationHandler(
             @RequestBody(required = true) final PatientCreationRequestDto patientCreationRequestDto) {
         return ResponseEntity.ok(patientService.create(patientCreationRequestDto));
     }
 
     @PutMapping(value = "/patient/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<?> patientUpdationhandler(
+    public ResponseEntity<?> patientUpdationHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId,
             @RequestBody(required = true) final PatientCreationRequestDto patientUpdationRequestDto) {
         patientService.update(patientId, patientUpdationRequestDto);
@@ -45,15 +46,23 @@ public class PatientController {
 
     @GetMapping(value = "/patient/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<PatientDto> patientRetreivalhandler(
+    public ResponseEntity<PatientDto> patientRetreivalHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId) {
         return ResponseEntity.ok(patientService.get(patientId));
     }
 
     @GetMapping(value = "/patient", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<List<PatientDto>> patientListRetreivalhandler() {
+    public ResponseEntity<List<PatientDto>> patientListRetreivalHandler() {
         return ResponseEntity.ok(patientService.get());
+    }
+
+    @DeleteMapping(value = "/patient/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity<?> patientDeletionHandler(
+            @PathVariable(required = true, name = "patientId") final UUID patientId) {
+        patientService.delete(patientId);
+        return ResponseEntity.ok().build();
     }
 
 }

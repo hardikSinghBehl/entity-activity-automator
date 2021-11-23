@@ -25,9 +25,13 @@ public class Activity {
     private LocalDateTime updatedAt;
     @Column(name = "updated_by", nullable = false)
     private UUID updatedBy;
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive;
 
     @PrePersist
     void onCreate() {
+        this.isActive = true;
+
         this.createdAt = LocalDateTime.now(ZoneId.of("+00:00"));
         this.updatedAt = LocalDateTime.now(ZoneId.of("+00:00"));
 

@@ -12,6 +12,7 @@ import com.behl.freezo.dto.AppointmentCreationRequestDto;
 import com.behl.freezo.dto.AppointmentDto;
 import com.behl.freezo.entity.Appointment;
 import com.behl.freezo.repository.AppointmentRepository;
+import com.behl.freezo.repository.PatientRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -20,6 +21,7 @@ import lombok.AllArgsConstructor;
 public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
+    private final PatientRepository patientRepository;
 
     public void create(final UUID patientId, final AppointmentCreationRequestDto appointmentCreationRequestDto) {
         final var appointment = new Appointment();
@@ -42,8 +44,22 @@ public class AppointmentService {
             return AppointmentDto.builder().id(appointment.getId()).patientId(appointment.getPatientId())
                     .scheduledAt(appointment.getScheduledAt()).createdAt(appointmentActivity.getCreatedAt())
                     .createdBy(appointmentActivity.getCreatedBy()).updatedAt(appointmentActivity.getUpdatedAt())
-                    .updatedBy(appointmentActivity.getUpdatedBy()).build();
+                    .updatedBy(appointmentActivity.getUpdatedBy()).isActive(appointmentActivity.isActive()).build();
         }).collect(Collectors.toList());
+    }
+
+    public void delete(final UUID patientId, final Integer appointmentId) {
+        final var patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        final var appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+
+        if (!appointment.getPatientId().equals(patient.getId()))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Appointment is not associated with the patient-id provided");
+
+        appointment.getActivity().setActive(false);
+        appointmentRepository.save(appointment);
     }
 
 }
