@@ -20,6 +20,7 @@ import com.behl.freezo.dto.PatientCreationRequestDto;
 import com.behl.freezo.dto.PatientDto;
 import com.behl.freezo.service.PatientService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -30,6 +31,7 @@ public class PatientController {
 
     @PostMapping(value = "/patient", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Creates a patient record")
     public ResponseEntity<Map<String, String>> patientCreationHandler(
             @RequestBody(required = true) final PatientCreationRequestDto patientCreationRequestDto) {
         return ResponseEntity.ok(patientService.create(patientCreationRequestDto));
@@ -37,6 +39,7 @@ public class PatientController {
 
     @PutMapping(value = "/patient/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Updates patient record details")
     public ResponseEntity<?> patientUpdationHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId,
             @RequestBody(required = true) final PatientCreationRequestDto patientUpdationRequestDto) {
@@ -46,6 +49,7 @@ public class PatientController {
 
     @GetMapping(value = "/patient/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Returns patient record details")
     public ResponseEntity<PatientDto> patientRetreivalHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId) {
         return ResponseEntity.ok(patientService.get(patientId));
@@ -53,12 +57,14 @@ public class PatientController {
 
     @GetMapping(value = "/patient", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Returns all patient records in system")
     public ResponseEntity<List<PatientDto>> patientListRetreivalHandler() {
         return ResponseEntity.ok(patientService.get());
     }
 
     @DeleteMapping(value = "/patient/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Deletesa a patient record")
     public ResponseEntity<?> patientDeletionHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId) {
         patientService.delete(patientId);

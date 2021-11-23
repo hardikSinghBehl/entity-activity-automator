@@ -18,6 +18,7 @@ import com.behl.freezo.dto.AppointmentCreationRequestDto;
 import com.behl.freezo.dto.AppointmentDto;
 import com.behl.freezo.service.AppointmentService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -28,6 +29,7 @@ public class AppointmentController {
 
     @PostMapping(value = "/patient/{patientId}/appointment")
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Creates an appointment for the patient")
     public ResponseEntity<?> appointmentCreationRequestHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId,
             @RequestBody(required = true) final AppointmentCreationRequestDto appointmentCreationRequestDto) {
@@ -37,6 +39,7 @@ public class AppointmentController {
 
     @PutMapping(value = "/patient/{patientId}/appointment/{appointmentId}")
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Updates appointment details")
     public ResponseEntity<?> appointmentUpdationRequestHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId,
             @PathVariable(required = true, name = "appointmentId") final Integer appointmentId,
@@ -47,6 +50,7 @@ public class AppointmentController {
 
     @GetMapping(value = "/patient/{patientId}/appointment")
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Returns all appointments for patient")
     public ResponseEntity<List<AppointmentDto>> appointmentsRetreivalHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId) {
         return ResponseEntity.ok(appointmentService.retreive(patientId));
@@ -54,6 +58,7 @@ public class AppointmentController {
 
     @DeleteMapping(value = "/patient/{patientId}/appointment/{appointmentId}")
     @ResponseStatus(value = HttpStatus.OK)
+    @Operation(summary = "Deletes an appointment for the patient")
     public ResponseEntity<?> appointmentDeletionRequestHandler(
             @PathVariable(required = true, name = "patientId") final UUID patientId,
             @PathVariable(required = true, name = "appointmentId") final Integer appointmentId) {
