@@ -11,7 +11,14 @@
 ---
 
 #### Repository used in [Medium Article](https://medium.com/@behl-hardik/automating-entity-activity-fields-using-threadlocal-and-jpas-embeddable-and-embedded-5b46d0a497c2)
+#### [Deployed Application Link](https://entity-activity-automator.herokuapp.com/swagger-ui.html) 🖥🥸
 #### can ⭐️ Repository if found helpful or leave comments in [Discussions](https://github.com/hardikSinghBehl/entity-activity-automator/discussions) 💬😄
+
+---
+### Explanation
+* #### Recording Demonstration
+https://user-images.githubusercontent.com/69693621/143672072-c97f3b59-fbec-45f5-8199-a8c96fa62ed5.mov
+
 
 ---
 ### Local Setup Guide
