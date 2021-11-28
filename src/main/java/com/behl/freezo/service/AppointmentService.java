@@ -13,6 +13,7 @@ import com.behl.freezo.dto.AppointmentDto;
 import com.behl.freezo.entity.Appointment;
 import com.behl.freezo.repository.AppointmentRepository;
 import com.behl.freezo.repository.PatientRepository;
+import com.behl.freezo.utility.ResponseProvider;
 
 import lombok.AllArgsConstructor;
 
@@ -22,11 +23,13 @@ public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final PatientRepository patientRepository;
+    private final ResponseProvider responseProvider;
 
     public void create(final UUID patientId, final AppointmentCreationRequestDto appointmentCreationRequestDto) {
         final var appointment = new Appointment();
         appointment.setPatientId(patientId);
         appointment.setScheduledAt(appointmentCreationRequestDto.getScheduledAt());
+
         appointmentRepository.save(appointment);
     }
 
@@ -41,10 +44,7 @@ public class AppointmentService {
     public List<AppointmentDto> retreive(final UUID patientId) {
         return appointmentRepository.findByPatientId(patientId).parallelStream().map(appointment -> {
             final var appointmentActivity = appointment.getActivity();
-            return AppointmentDto.builder().id(appointment.getId()).patientId(appointment.getPatientId())
-                    .scheduledAt(appointment.getScheduledAt()).createdAt(appointmentActivity.getCreatedAt())
-                    .createdBy(appointmentActivity.getCreatedBy()).updatedAt(appointmentActivity.getUpdatedAt())
-                    .updatedBy(appointmentActivity.getUpdatedBy()).isActive(appointmentActivity.isActive()).build();
+            return responseProvider.appointmentResponse(appointment, appointmentActivity);
         }).collect(Collectors.toList());
     }
 

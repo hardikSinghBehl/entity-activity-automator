@@ -1,6 +1,5 @@
 package com.behl.freezo.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -14,6 +13,7 @@ import com.behl.freezo.dto.PatientCreationRequestDto;
 import com.behl.freezo.dto.PatientDto;
 import com.behl.freezo.entity.Patient;
 import com.behl.freezo.repository.PatientRepository;
+import com.behl.freezo.utility.ResponseProvider;
 
 import lombok.AllArgsConstructor;
 
@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 public class PatientService {
 
     private final PatientRepository patientRepository;
+    private final ResponseProvider responseProvider;
 
     public Map<String, String> create(final PatientCreationRequestDto patientCreationRequestDto) {
         final var patient = new Patient();
@@ -29,19 +30,15 @@ public class PatientService {
 
         final var savedPatient = patientRepository.save(patient);
 
-        final var response = new HashMap<String, String>();
-        response.put("patient-id", savedPatient.getId().toString());
-        return response;
+        return responseProvider.savedPatientResponse(savedPatient);
     }
 
     public PatientDto get(final UUID patientId) {
         final var patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         final var patientActivity = patient.getActivity();
-        return PatientDto.builder().id(patient.getId()).fullName(patient.getFullName())
-                .createdAt(patientActivity.getCreatedAt()).createdBy(patientActivity.getCreatedBy())
-                .updatedAt(patientActivity.getUpdatedAt()).updatedBy(patientActivity.getUpdatedBy())
-                .isActive(patientActivity.isActive()).build();
+
+        return responseProvider.patientResponse(patient, patientActivity);
     }
 
     public void update(final UUID patientId, final PatientCreationRequestDto patientUpdationRequestDto) {
@@ -55,10 +52,7 @@ public class PatientService {
     public List<PatientDto> get() {
         return patientRepository.findAll().parallelStream().map(patient -> {
             final var patientActivity = patient.getActivity();
-            return PatientDto.builder().id(patient.getId()).fullName(patient.getFullName())
-                    .createdAt(patientActivity.getCreatedAt()).createdBy(patientActivity.getCreatedBy())
-                    .updatedAt(patientActivity.getUpdatedAt()).updatedBy(patientActivity.getUpdatedBy())
-                    .isActive(patientActivity.isActive()).build();
+            return responseProvider.patientResponse(patient, patientActivity);
         }).collect(Collectors.toList());
     }
 
