@@ -1,5 +1,6 @@
 package com.behl.freezo.entity.embeddable;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.UUID;
@@ -15,7 +16,9 @@ import lombok.Data;
 
 @Embeddable
 @Data
-public class Activity {
+public class Activity implements Serializable {
+
+    private static final long serialVersionUID = -2198531438505511438L;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
